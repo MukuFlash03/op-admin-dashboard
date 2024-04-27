@@ -23,9 +23,48 @@ on:
 env:
   DOCKER_USER: ${{secrets.DOCKER_USER}}
   DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  DOCKER_IMAGE_TAG: ${{ github.event.inputs.docker_image_tag }}
+      
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
+  fetch_tag:
+    if: ${{ github.event_name == "workflow_dispatch" }}
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Print input docker image tag
+      run: |
+        echo "Input latest docker image tag: ${{ env.DOCKER_IMAGE_TAG }}"
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with: 
+        python-version: '3.x'
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install argparse
+
+    - name: Run Python script
+      id: run_script
+      run: |
+        echo "Running script to replace docker image tags in Dockerfiles"
+        python .github/replaceTags.py --file=docker/Dockerfile
+        python .github/replaceTags.py --file=Dockerfile
+
+    - name: Add, Commit, Push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docker/Dockerfile Dockerfile
+        git commit -m "Updated docker image tags in Dockerfiles to the latest timestamp: ${{ env.DOCKER_IMAGE_TAG }}"
+        git push origin 
+
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
@@ -57,6 +96,3 @@ jobs:
     #   run: |
     #     docker push $DOCKER_USER/${GITHUB_REPOSITORY#*/}:${GITHUB_REF##*/}_${{ steps.date.outputs.date }}
 
-    - name: Print input docker image tag
-      run: |
-        echo "Input latest docker image tag: ${{ github.event.inputs.docker_image_tag }}"
