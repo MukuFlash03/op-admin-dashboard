@@ -38,6 +38,8 @@ jobs:
 
     - name: Print input docker image tag
       run: |
+        echo "Event name: ${{ github.event_name }}"
+        echo "Event name: ${{ github.event.action }}"
         echo "Input latest docker image tag: ${{ env.DOCKER_IMAGE_TAG }}"
 
     - name: Set up Python
@@ -79,8 +81,6 @@ jobs:
     - name: docker login
       run: | # log into docker hub account
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-        echo "Event name: ${{ github.event_name }}"
-        echo "Event name: ${{ github.event.action }}"
 
     - name: Get current date # get the date of the build
       id: date
