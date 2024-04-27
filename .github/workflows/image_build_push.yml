@@ -56,8 +56,8 @@ jobs:
       id: run_script
       run: |
         echo "Running script to replace docker image tags in Dockerfiles"
-        python .github/replaceTags.py --file=docker/Dockerfile
-        python .github/replaceTags.py --file=Dockerfile
+        python .github/replaceTags.py --file=docker/Dockerfile --tag=${{ env.DOCKER_IMAGE_TAG }}
+        python .github/replaceTags.py --file=Dockerfile --tag=${{ env.DOCKER_IMAGE_TAG }}
 
     - name: Add, Commit, Push changes
       run: |
