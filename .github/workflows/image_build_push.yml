@@ -2,7 +2,7 @@ name: docker-image-push-admin
 
 on:
   push:
-    branches: [ master ]
+    branches: [ image-push-2 ]
 
   workflow_dispatch:
     inputs:
