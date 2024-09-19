@@ -31,8 +31,8 @@ jobs:
     - name: Print input docker image tag
       run: |
         echo "Event name: ${{ github.event_name }}"
-        echo "Latest docker image tag (push): ${{ steps.set-tags.outputs.DOCKER_TAG_FROM_PUSH }}
-        echo "Latest docker image tag (workflow_dispatch): ${{ steps.set-tags.outputs.DOCKER_TAG_FROM_WORKFLOW_DISPATCH }}
+        echo "Latest docker image tag (push): ${{ steps.set-tags.outputs.DOCKER_TAG_FROM_PUSH }}"
+        echo "Latest docker image tag (workflow_dispatch): ${{ steps.set-tags.outputs.DOCKER_TAG_FROM_WORKFLOW_DISPATCH }}"
 
     - name: docker login
       run: | # log into docker hub account
