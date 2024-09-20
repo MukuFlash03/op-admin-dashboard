@@ -60,12 +60,6 @@ jobs:
 
     - name: build docker image
       run: |
-        docker compose -f docker-compose-prod.yml build
-        docker images
-
-    - name: Build docker image
-      run: |
-        echo "SERVER_IMAGE_TAG=${{ steps.get-server-tag.outputs.SERVER_IMAGE_TAG }}"
         SERVER_IMAGE_TAG=${{ steps.get-server-tag.outputs.SERVER_IMAGE_TAG }} docker compose -f docker-compose-prod.yml build
         docker images
 
