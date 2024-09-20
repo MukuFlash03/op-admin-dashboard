@@ -74,7 +74,6 @@ jobs:
     - name: Update .env.tags file 
       run: |
         echo "ADMIN_DASH_IMAGE_TAG=${{ steps.date.outputs.date }}" > .env.tags
-        echo "SERVER_IMAGE_TAG=${{ steps.get-server-tag.outputs.SERVER_IMAGE_TAG }}" >> .env.tags
 
     - name: Add, Commit, Push changes to .env.tags file
       run: |
