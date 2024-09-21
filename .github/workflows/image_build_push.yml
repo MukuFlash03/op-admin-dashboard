@@ -79,7 +79,7 @@ jobs:
 
     - name: Create artifact text file
       run: |
-        echo ${GITHUB_REF##*/}_${{ steps.date.outputs.date }} > admin_dash_tag_file.txt
+        echo ${{ steps.date.outputs.date }} > admin_dash_tag_file.txt
         echo "Created tag text file"
 
     - name: Upload Artifact
