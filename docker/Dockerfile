@@ -3,8 +3,6 @@ ARG SERVER_IMAGE_TAG
 # FROM shankari/e-mission-server:${SERVER_IMAGE_TAG}
 FROM mukuflash03/e-mission-server:${SERVER_IMAGE_TAG}
 
-ADD https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem /etc/ssl/certs/
-
 ENV DASH_DEBUG_MODE True
 ENV SERVER_PORT 8050
 
