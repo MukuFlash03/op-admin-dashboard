@@ -1,7 +1,9 @@
 ARG SERVER_IMAGE_TAG
 
 # FROM shankari/e-mission-server:${SERVER_IMAGE_TAG}
-FROM mukuflash03/e-mission-server:${SERVER_IMAGE_TAG}
+# FROM mukuflash03/e-mission-server:${SERVER_IMAGE_TAG}
+FROM ghcr.io/MukuFlash03/e-mission-server/e-mission-server:${SERVER_IMAGE_TAG}
+LABEL org.opencontainers.image.source=https://github.com/MukuFlash03/op-admin-dashboard
 
 ENV DASH_DEBUG_MODE True
 ENV SERVER_PORT 8050
